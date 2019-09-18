@@ -272,11 +272,13 @@ The Restart customizer allows you to restart a Windows VM and wait for it come b
 
 ```json 
      "customize": [ 
-            "type{ ": "WindowsRestart", 
+         {   
+	    "type": "WindowsRestart", 
             "restartCommand": "shutdown /r /f /t 0 /c", 
             "restartCheckCommand": "echo Azure-Image-Builder-Restarted-the-VM  > buildArtifacts/azureImageBuilderRestart.txt",
             "restartTimeout": "5m"
-         }],
+         }
+     ],
 ```
 
 OS Support: Windows
@@ -302,9 +304,9 @@ The shell customizer supports running PowerShell scripts and inline command, the
              "type": "PowerShell", 
              "name": "<name>", 
              "inline": "<PowerShell syntax to run>", 
-  	         "valid_exit_codes": "<exit code>" 
-         } 
- 	], 
+  	     "valid_exit_codes": "<exit code>" 
+        } 
+    ], 
 ```
 
 OS support: Windows and Linux
@@ -323,7 +325,7 @@ The File customizer lets image builder download a file from a GitHub or Azure st
 ```json
      "customize": [ 
          { 
-            "type": "File", 
+             "type": "File", 
              "name": "<name>", 
              "sourceUri": "<source location>",
              "destination": "<destination>" 
@@ -403,15 +405,16 @@ The image output will be a managed image resource.
 ```json
 "distribute": [
         {
-"type":"managedImage",
-       "imageId": "<resource ID>",
-       "location": "<region>",
-       "runOutputName": "<name>",
-       "artifactTags": {
-            "<name": "<value>",
-             "<name>": "<value>"
-               }
-         }]
+            "type":"managedImage",
+            "imageId": "<resource ID>",
+            "location": "<region>",
+            "runOutputName": "<name>",
+            "artifactTags": {
+                "<name": "<value>",
+                "<name>": "<value>"
+            }
+        }
+    ]
 ```
  
 Distribute properties:
@@ -443,13 +446,14 @@ Before you can distribute to the Image Gallery, you must create a gallery and an
      "galleryImageId": “<resource ID>”,
      "runOutputName": "<name>",
      "artifactTags": {
-          "<name": "<value>",
-           "<name>": "<value>"
-             }
+          "<name>": "<value>",
+          "<name>": "<value>"
+     }
      "replicationRegions": [
         "<region where the gallery is deployed>",
         "<region>"
-    ]}
+    ]
+}
 ``` 
 
 Distribute properties for shared image galleries:
@@ -472,9 +476,9 @@ You can output to a VHD. You can then copy the VHD, and use it to publish to Azu
      "type": "VHD",
      "runOutputName": "<VHD name>",
      "tags": {
-          "<name": "<value>",
-           "<name>": "<value>"
-             }
+          "<name>": "<value>",
+          "<name>": "<value>"
+     }
  }
 ```
  
